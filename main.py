@@ -1,14 +1,26 @@
 import os
 from PyPDF2 import PdfMerger
-def get_files(dir):
+from tkinter import *
+from tkinter import filedialog
+
+def askfile():
+    files = filedialog.askopenfilenames(title = 'Escolha arquivos',filetypes = (("PDF","*.PDF"),("all files","*.*")))
+    return files
+
+def savefile():
+    result = filedialog.askdirectory(title='Escolha diretório de destino')
+    return result
+def get_files():
     merger = PdfMerger()
-    for file in os.listdir(dir):
-        print(file.split(' - ')[0])
-        merger.append(f'{dir}/{file}')
-    merger.write(f'{dir}/result.pdf')
+    files = askfile()
+    result = savefile()
+    print(result)
+    resultfile = 'result.pdf'
+    for file in files:
+        print(file)
+        merger.append(file)
+    merger.write(f'{result}/{resultfile}')
     merger.close()
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    dir = "folder "
-    get_files(dir)
+    get_files()
