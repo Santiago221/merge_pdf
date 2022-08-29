@@ -1,2 +1,2 @@
 # merge_pdf
-project to merge pdfs
+simple python application to merge pdf files
